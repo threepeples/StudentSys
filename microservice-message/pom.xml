@@ -2,10 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>common-repository</artifactId>
+    <groupId>cn.scnu.com</groupId>
+    <artifactId>microservice-message</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>common-repository</name>
-    <description>common-repository</description>
+    <name>microservice-message</name>
+    <description>microservice-message</description>
     <parent>
         <groupId>cn.scnu.com</groupId>
         <artifactId>StudentSys</artifactId>
@@ -20,26 +21,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>cn.scnu.com</groupId>
+            <artifactId>common-resources</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>cn.scnu.com</groupId>
+            <artifactId>common-repository</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>3.4.3.4</version>
+            <groupId>cn.scnu.com</groupId>
+            <artifactId>common-redis-cluster</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.14</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
     </dependencies>
-
 
 
 </project>

@@ -2,9 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>common-resources</artifactId>
-    <name>common-resources</name>
-    <description>common-resources</description>
+    <groupId>cn.scnu.com</groupId>
+    <artifactId>eureka-server</artifactId>
+    <name>eureka-server</name>
+    <description>eureka-server</description>
     <parent>
         <groupId>cn.scnu.com</groupId>
         <artifactId>StudentSys</artifactId>
@@ -18,8 +19,13 @@
     </properties>
 
     <dependencies>
-
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
 
 
 </project>
