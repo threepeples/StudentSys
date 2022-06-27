@@ -60,11 +60,11 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/amateur?useUnicode = true & characterEncoding = UTF-8 & serverTimezone = Asia" +
+        dsc.setUrl("jdbc:mysql://139.159.161.129:3306/courseselectsystem?useUnicode = true & characterEncoding = UTF-8 & serverTimezone = Asia" +
                 "/Shanghai");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("RST430925@vin");
+        dsc.setPassword("NyND!plE");
         mpg.setDataSource(dsc);
         // 包配置
         PackageConfig pc = new PackageConfig();
