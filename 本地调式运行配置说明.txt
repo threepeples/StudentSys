@@ -1,0 +1,22 @@
+第一步：在C:\Windows\System32\drivers\etc下的hosts文件中添加配置
+127.0.0.1	www.studentSys.com
+第二步:在nginx的配置文件中添加以下配置
+	server {
+		listen 80;
+		server_name www.studentSys.com;
+		location /course {
+			proxy_pass http://127.0.0.1:9005/zuul-course/course/manage;
+			add_header 'Access-Control-Allow-Credentials' 'true';
+			add_header 'Access-Control-Allow-Origin' '*';
+		}
+		location /user {
+			proxy_pass http://127.0.0.1:9005/zuul-user/user/manage;
+			add_header 'Access-Control-Allow-Credentials' 'true';
+			add_header 'Access-Control-Allow-Origin' '*';
+		}
+		location /message {
+			proxy_pass http://127.0.0.1:9005/zuul-message/message/manage;
+			add_header 'Access-Control-Allow-Credentials' 'true';
+			add_header 'Access-Control-Allow-Origin' '*';
+		}
+	}
