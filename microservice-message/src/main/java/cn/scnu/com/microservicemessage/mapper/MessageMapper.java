@@ -8,5 +8,5 @@ package cn.scnu.com.microservicemessage.mapper;
  * @Author HJW
  */
 
-public class MessageMapper {
+public interface MessageMapper {
 }
