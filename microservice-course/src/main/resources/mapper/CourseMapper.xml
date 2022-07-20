@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.scnu.com.microservicecourse.mapper.CourseMapper">
-
+    <!-- 增加课程-->
+    <insert id="CoursesSave" parameterType="Courses">
+        insert into courses(courses_id,courses_name,courses_type,
+                            courses_hour,credit,semester,courses_description)
+        values(#{courses_id},#{courses_name},#{courses_type},#{courses_hour},#{credit},#{semester},#{courses_description})
+    </insert>
+    <!--删除单条课程 -->
+    <delete id="DelCourses" parameterType="int">
+        delete * from courses where courses_id=#{courses_id}
+    </delete>
+    <!-- 更新课程-->
+    <update id="CourseUpdate" parameterType="Courses">
+        update courses set
+                           courses_name=#{courses_name},
+                           courses_type=#{courses_type},
+                           courses_hour=#{courses_hour},
+                           credit=#{credit},
+                           semester=#{semester},
+                           courses_description=#{courses_description}
+        where courses_id=#{courses_id}
+    </update>
+    <!-- 查询单条课程-->
+    <select id="" resultType="Courses" parameterType="int">
+        select * from courses where courses_id=#{courses_id}
+    </select>
+    <!-- 查询全部课程-->
+    <select id="queryTotal" resultType="int">
+        select count(courses_id) from courses
+    </select>
 </mapper>
