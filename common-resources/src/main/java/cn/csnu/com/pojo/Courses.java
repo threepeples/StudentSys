@@ -50,62 +50,6 @@ public class Courses implements Serializable {
     @ApiModelProperty(value = "课程简介")
     private String courses_description;
 
-    public Integer getCourses_id() {
-        return courses_id;
-    }
-
-    public void setCourses_id(Integer courses_id) {
-        this.courses_id = courses_id;
-    }
-
-    public String getCourses_name() {
-        return courses_name;
-    }
-
-    public void setCourses_name(String courses_name) {
-        this.courses_name = courses_name;
-    }
-
-    public String getCourses_type() {
-        return courses_type;
-    }
-
-    public void setCourses_type(String courses_type) {
-        this.courses_type = courses_type;
-    }
-
-    public Integer getCourses_hour() {
-        return courses_hour;
-    }
-
-    public void setCourses_hour(Integer courses_hour) {
-        this.courses_hour = courses_hour;
-    }
-
-    public Integer getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Integer credit) {
-        this.credit = credit;
-    }
-
-    public Integer getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Integer semester) {
-        this.semester = semester;
-    }
-
-    public String getCourses_description() {
-        return courses_description;
-    }
-
-    public void setCourses_description(String courses_description) {
-        this.courses_description = courses_description;
-    }
-
     @java.lang.Override
     public java.lang.String toString() {
         return "Courses{" +
