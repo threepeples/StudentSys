@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  * @Author HJW
  */
-@RestController("course/manage")
+@RestController("course/info")
 public class CourseController {
 
 }

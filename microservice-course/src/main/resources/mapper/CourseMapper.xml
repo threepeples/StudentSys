@@ -30,4 +30,125 @@
     <select id="queryTotal" resultType="int">
         select count(courses_id) from courses
     </select>
+
+
+
+
+
+
+
+
+    <!--下面是选课所需内容-->
+    <resultMap id="CMsgMap" type="cn.scnu.com.microservicecourse.entity.CoursesClasses">
+        <id property="coursesId" column="courses_id"/>
+        <result property="coursesName" column="courses_name"/>
+        <result property="coursesType" column="courses_type"/>
+        <result property="coursesHour" column="courses_hour"/>
+        <result property="credit" column="credit"/>
+        <result property="semester" column="semester"/>
+        <result property="coursesDescription" column="courses_description"/>
+        <result property="classesId" column="classes_id"/>
+        <result property="classTime" column="class_time"/>
+        <result property="classroom" column="classroom"/>
+        <result property="capacity" column="capacity"/>
+        <result property="teacherName" column="class_day"/>
+        <result property="number" column="number"/>
+        <result property="classDay" column="stat"/>
+
+    </resultMap>
+
+    <!--一次性获取全部可选class的详细信息-->
+    <select id="getSelectableClasses" resultMap="CMsgMap">
+
+        SELECT courses.courses_id, courses_name, courses_type, courses_hour, credit, courses.semester, courses_description, classes_id, class_time, classroom, capacity, teacher_name, class_day,number
+        FROM courses as courses,classes as classes,optional_courses as opt
+        where opt.majors_id=#{majors_id} and opt.semester=#{semester}
+          and courses.courses_id=classes.courses_id
+          and courses.courses_id= opt.courses_id;
+
+    </select>
+
+
+    <!--获取couresid对应的class的详细信息-->
+    <select id="getClassesInfoByCourseId" resultMap="CMsgMap" parameterType="String">
+        SELECT courses.courses_id, courses_name, courses_type, courses_hour, credit, courses.semester, courses_description, classes_id, class_time, classroom, capacity, teacher_name, class_day,number
+        FROM courses as courses,classes as classes
+        where courses.courses_id=#{courses_id}
+          and courses.courses_id=classes.courses_id;
+    </select>
+
+    <!--获取class_id对应的class的详细信息-->
+    <select id="getClassesInfo" resultMap="CMsgMap">
+        SELECT courses.courses_id, courses_name, courses_type, courses_hour, credit, courses.semester, courses_description, classes_id, class_time, classroom, capacity, teacher_name, class_day,number
+        FROM courses as courses,classes as classes
+        where courses.courses_id=classes.courses_id
+          and classes_id=#{classes_id};
+    </select>
+
+    <!--获取已选class的id信息-->
+    <select id="getSelectedClassId" resultType="String">
+
+        SELECT classes_id FROM class_selections where student_id=#{student_id} ;
+
+    </select>
+
+    <!--获取可选class的id信息-->
+    <select id="getSelectableClassId" resultType="String">
+
+        SELECT classes_id FROM optional_courses , classes
+        where majors_id=#{majors_id} and semester=#{semester}
+          and classes.courses_id = optional_courses.courses_id;
+
+    </select>
+
+    <!--获取可选Courses的id信息-->
+    <select id="getSelectableCoursesId" resultType="String">
+
+        SELECT courses_id FROM course.optional_courses
+        where majors_id=#{majors_id} and semester=#{semester};
+
+    </select>
+
+
+
+
+
+
+    <select id="getClassNumberLeft" resultType="Integer" parameterType="String">
+
+        SELECT number FROM classes where classes_id=#{class_id};
+
+    </select>
+
+    <select id="getSelectedOne" resultType="cn.scnu.com.microservicecourse.entity.ClassSelections">
+
+        SELECT classes_id FROM class_selections where student_id=#{student_id} and classes_id like #{classes_id};
+
+    </select>
+
+    <select id="getSelectedOneClass" resultType="cn.scnu.com.microservicecourse.entity.ClassSelections">
+
+        SELECT classes_id FROM class_selections where student_id=#{student_id} and classes_id = #{classes_id};
+
+    </select>
+
+    <insert id="joinClass">
+        insert into class_selections (student_id,classes_id) values (#{student_id},#{classes_id});
+    </insert>
+
+    <delete id="dropClass">
+        delete from class_selections where student_id=#{student_id} and classes_id=#{classes_id};
+    </delete>
+
+    <update id="DeclineClassNumberLeft" parameterType="String">
+        update classes set number=number-1 where classes_id=#{classes_id}
+    </update>
+
+    <update id="AddClassNumberLeft" parameterType="String">
+        update classes set number=number+1 where classes_id=#{classes_id}
+    </update>
+
+
+
+
 </mapper>

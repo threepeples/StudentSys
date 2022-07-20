@@ -1,5 +1,7 @@
 package cn.scnu.com.microservicecourse.service;
 
+import cn.scnu.com.microservicecourse.entity.Courses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,8 +16,7 @@ public class CourseService {
     @Autowired
     private CoursesMapper coursesMapper;//注入CoursesMapper
     //直接注入JedisCluster,在方法中就可以实现缓存redis数据库使用。
-    @Autowired
-    private JedisCluster
+
     //增加课程
     public void CoursesSave(Courses courses){
 
