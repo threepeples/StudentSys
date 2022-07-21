@@ -29,6 +29,12 @@
             <artifactId>common-repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!--config-server-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
     </dependencies>
 
 
