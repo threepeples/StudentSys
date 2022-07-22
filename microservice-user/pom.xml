@@ -29,7 +29,11 @@
             <artifactId>common-repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>cn.scnu.com</groupId>
+            <artifactId>common-redis-cluster</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--config-server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

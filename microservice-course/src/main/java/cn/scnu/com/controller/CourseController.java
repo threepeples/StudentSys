@@ -11,12 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  * @Author HJW
  */
-@RestController("course/manage/info")
+@RestController
 public class CourseController {
-
-    @RequestMapping("hello")
-    public Result Hello(){
-        return Result.success("{name: 张三}");
-    }
 
 }

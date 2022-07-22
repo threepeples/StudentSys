@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -24,17 +25,15 @@ import java.util.TimerTask;
  * @Date: 2022/06/27 16:35
  */
 
-@RestController("/course/manage")
+@RestController
 @EnableScheduling
+@RequestMapping("/course/manage")
 public class ManageCourseController {
-
 
     @Autowired
     private ICoursesService coursesService;
 
-
     private static Timer timer=new Timer();
-
 
     //开始选课，输入选课时间
     @PostMapping("startSelectTime")
@@ -127,7 +126,6 @@ public class ManageCourseController {
     public Result getSelectTime(){
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");// 设置你想要的格式
-
 
         return  Result.success(df.format(CommonUtils.BeginTime.getTime())+","+df.format(CommonUtils.EndTime.getTime()));
     }

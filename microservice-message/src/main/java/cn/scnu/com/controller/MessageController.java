@@ -1,5 +1,7 @@
 package cn.scnu.com.controller;
 
+import cn.scnu.com.util.Result.Result;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  * @Author HJW
  */
-@RestController("Message/manage")
+@RestController
+@RequestMapping("/message/manage")
 public class MessageController {
 
 }
