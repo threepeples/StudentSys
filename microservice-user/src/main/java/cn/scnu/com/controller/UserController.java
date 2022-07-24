@@ -94,6 +94,9 @@ public class UserController {
      */
     @RequestMapping("changePwd")
     public Result changePwd(@RequestBody changePwdVo vo, HttpServletRequest request){
+        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
+            return Result.error("您还未登录！");
+        }
         String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
         if(userService.changePwd(vo.getOldPwd(),vo.getNewPwd(), Integer.valueOf(account))){
             return Result.success("修改成功");
@@ -108,6 +111,9 @@ public class UserController {
      */
     @RequestMapping("getStuInfo")
     public Result getStuInfo(HttpServletRequest request){
+        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
+            return Result.error("您还未登录！");
+        }
         String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
         return Result.success(userService.queryStuDetailsByAccount(Integer.valueOf(account)));
     }
@@ -120,6 +126,9 @@ public class UserController {
      */
     @RequestMapping("stuChangeStuInfo")
     public Result changeStuInfoByStu(String description,HttpServletRequest request){
+        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
+            return Result.error("您还未登录！");
+        }
         String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
         userService.changeStuInfoByStu(description, Integer.valueOf(account));
         return Result.success("修改成功");
@@ -135,6 +144,7 @@ public class UserController {
     @RequestMapping("adminChangeStuInfo")
     public Result changeStuInfoByAdmin(@RequestBody stuVo stuVo){
         String result = userService.changeStuInfoByAdmin(stuVo);
+        System.out.println(stuVo);
         return Result.success(result);
     }
 
