@@ -1,4 +1,4 @@
-package cn.scnu.com.pojo;
+package cn.scnu.com.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,26 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
-/**
- * <p>
- * 学生表
- * </p>
- *
- * @author su_jue
- * @since 2022-07-17
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Students对象", description="学生表")
-public class Students implements Serializable {
+@ApiModel(value="Students数据传输对象", description="学生表和用户表")
+public class stuVo {
 
-    private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "学生id")
+    @ApiModelProperty(value = "学号")
     private Integer studentId;
 
     @ApiModelProperty(value = "学生名字")
@@ -35,10 +23,10 @@ public class Students implements Serializable {
     @ApiModelProperty(value = "学生描述")
     private String description;
 
-    @ApiModelProperty(value = "学生专业id")
-    private Integer majorsId;
+    @ApiModelProperty(value = "学生专业")
+    private String major;
 
-    @ApiModelProperty(value = "学生所在年级id")
+    @ApiModelProperty(value = "学生所在年级")
     private Integer gradeId;
 
     @ApiModelProperty(value = "目前处于第几学期")

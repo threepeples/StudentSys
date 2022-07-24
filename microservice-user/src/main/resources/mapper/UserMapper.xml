@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.scnu.com.mapper.UserMapper">
+
+    <!--根据账号获取用户-->
+    <select id="queryUserByAccountAndPwd" parameterType="Users" resultType="Users">
+        select * from users where account=#{account} and pwd=#{pwd}
+    </select>
+
+    <!--获取用户角色-->
+    <select id="queryUserRoleByAccount" parameterType="Integer" resultType="String">
+        select role from users where account=#{account}
+    </select>
+
+    <!--修改密码-->
+    <update id="changePwd" parameterType="Users">
+        update users set pwd=#{pwd} where account=#{account}
+    </update>
+
+    <!--根据账号找到学生用户详细信息-->
+    <select id="queryStudentDetailsByAccount" parameterType="Integer" resultType="Students">
+        select * from students where student_id=#{account}
+    </select>
+
+    <!--导入学生个人信息-->
+    <insert id="insertStudentInfo" parameterType="java.util.List">
+        insert into students (student_id,name,description,majors_id,grade_id,semester,time_enrollment) values
+        <foreach collection="students" item="student" index="index" separator=",">
+            (
+                #{student.studentId},#{student.name},#{student.description},
+                #{student.majorsId},#{student.gradeId},#{student.semester},#{student.timeEnrollment}
+            )
+        </foreach>
+    </insert>
+
+    <!--导入用户表，生成账号-->
+    <insert id="insertStudentUser" parameterType="java.util.List">
+        insert into users (account,pwd,role) values
+        <foreach collection="users" item="user" index="index" separator=",">
+            (
+                #{user.account},#{user.pwd},#{user.role}
+            )
+        </foreach>
+    </insert>
     
+    <!--根据major找到majorId-->
+    <select id="queryMajorIdByMajor" parameterType="String" resultType="Integer">
+        select majors_id from majors where name=#{major}
+    </select>
+
+    <!--修改学生description-->
+    <update id="changeStuInfoByStu">
+        update students set description=#{description} where student_id=#{account}
+    </update>
+
+    <!--管理员修改学生信息-->
+    <update id="changeStuInfoByAdmin" parameterType="Students">
+        update students set
+        name=#{name},description=#{description},majors_id=#{majorsId},grade_id=#{gradeId},
+        semester=#{semester},time_enrollment=#{timeEnrollment}
+        where student_id=#{studentId}
+    </update>
+
+    <!--通过名字找到老师-->
+    <select id="queryTeacherByTeacherName" parameterType="String" resultType="Teachers">
+        select * from teachers where name=#{name}
+    </select>
+
+    <!--导入老师信息-->
+    <insert id="insertTeacherInfo" parameterType="java.util.List">
+        insert into teachers (name,description,create_time) values
+        <foreach collection="teachers" item="teacher" index="index" separator=",">
+            (
+                #{teacher.name},#{teacher.description},#{teacher.create_time}
+            )
+        </foreach>
+    </insert>
 </mapper>

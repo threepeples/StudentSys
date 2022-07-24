@@ -9,9 +9,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 @MapperScan("cn.scnu.com.mapper")
 public class MicroserviceUserApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MicroserviceUserApplication.class, args);
     }
-
 }

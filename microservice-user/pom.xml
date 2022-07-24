@@ -19,6 +19,31 @@
     </properties>
 
     <dependencies>
+<!--        &lt;!&ndash;spring security安全框架&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--            <version>2.7.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;jwt依赖&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt</artifactId>-->
+<!--            <version>0.9.1</version>-->
+<!--        </dependency>-->
+        <!--fastjson转换工具-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <!-- 添加支持redis的依赖 -->
+        <dependency>
+            <groupId>cn.scnu.com</groupId>
+            <artifactId>common-redis-cluster</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>cn.scnu.com</groupId>
             <artifactId>common-resources</artifactId>
@@ -29,19 +54,10 @@
             <artifactId>common-repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>cn.scnu.com</groupId>
-            <artifactId>common-redis-cluster</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!--config-server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
     </dependencies>
-
-
-
-
 </project>
