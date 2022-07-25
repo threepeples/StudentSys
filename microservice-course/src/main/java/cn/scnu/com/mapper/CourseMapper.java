@@ -23,14 +23,16 @@ import java.util.Set;
 public interface CourseMapper {
     //增加课程
     public void CoursesSave(Courses courses);
-    //删除单条课程
-    public void DelCourses(Integer courses_id);
+
     //更新课程
     public void CourseUpdate(Courses courses);
     //查询单条课程
     public  Courses queryById(Integer courses_id);
     //查询全部课程
     public Integer queryTotal();
+    //交给sql语句的惨呼一般只有1个，2个也可以使用#{}
+    //多个参数传递给sqlSession格局映射文件#{}拼接数据时，可以采用@Param注解定义参数变量名称
+    public List<Courses> queryByPage(@Param("start")Integer start,@Param("rows")Integer rows);//分页查看
 
 //________________________
 
