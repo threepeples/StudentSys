@@ -5,7 +5,7 @@
 		listen 80;
 		server_name www.studentSys.com;
 		location /course {
-			proxy_pass http://127.0.0.1:9005/zuul-course/course/manage;
+			proxy_pass http://127.0.0.1:9005/zuul-course/course;
 			add_header 'Access-Control-Allow-Credentials' 'true';
 			add_header 'Access-Control-Allow-Origin' '*';
 		}

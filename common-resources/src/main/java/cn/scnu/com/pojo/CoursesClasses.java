@@ -1,5 +1,6 @@
 package cn.scnu.com.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,75 +18,47 @@ public class CoursesClasses implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 课程编号
-     */
+    @ApiModelProperty(value = "课程编号")
     private Integer coursesId;
 
-    /**
-     * 课程名称
-     */
+    @ApiModelProperty(value = "课程名称")
     private String coursesName;
 
-    /**
-     * 课程性质(选修2必修1)
-     */
+    @ApiModelProperty(value = "课程性质")
+    /*(选修2必修1)*/
     private String coursesType;
 
-    /**
-     * 学时
-     */
+    @ApiModelProperty(value = "学时")
     private Integer coursesHour;
 
-    /**
-     * 学分
-     */
+    @ApiModelProperty(value = "学分")
     private Integer credit;
 
-    /**
-     * 开课学期
-     */
+    @ApiModelProperty(value = "开课学期")
     private Integer semester;
 
-    /**
-     * 课程简介
-     */
+    @ApiModelProperty(value = "课程简介")
     private String coursesDescription;
 
-    /**
-     * 班级编号
-     */
+    @ApiModelProperty(value = "班级编号")
     private String classesId;
 
-    /**
-     * 上课第几时段
-     */
+    @ApiModelProperty(value = "上课第几时段")
     private Integer classTime;
 
-    /**
-     * 上课位置
-     */
+    @ApiModelProperty(value = "上课位置")
     private String classroom;
 
-    /**
-     * 课程可容纳人数
-     */
+    @ApiModelProperty(value = "课程可容纳人数")
     private Integer capacity;
 
-
-    /**
-     * 教学班授课老师名字
-     */
+    @ApiModelProperty(value = "教学班授课老师名字")
     private String teacherName;
 
-    /**
-     * 星期几上课
-     */
+    @ApiModelProperty(value = "星期几上课")
     private Integer classDay;
 
-    /**
-     * 剩余人数
-     */
+    @ApiModelProperty(value = "剩余人数")
     private Integer number;
 
 }

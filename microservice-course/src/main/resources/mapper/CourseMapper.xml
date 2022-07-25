@@ -31,6 +31,13 @@
         select count(courses_id) from courses
     </select>
 
+
+
+
+
+
+
+
     <!--下面是选课所需内容-->
     <resultMap id="CMsgMap" type="CoursesClasses">
         <id property="coursesId" column="courses_id"/>
