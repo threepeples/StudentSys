@@ -1,8 +1,10 @@
 package cn.scnu.com.service.impl;
 
 import cn.scnu.com.mapper.CourseMapper;
+import cn.scnu.com.pojo.Courses;
 import cn.scnu.com.service.ICoursesService;
 import cn.scnu.com.util.Constants;
+import cn.scnu.com.util.EasyUIResult;
 import cn.scnu.com.util.SerializeUtil;
 import cn.scnu.com.util.WriteBackSetUtil;
 import cn.scnu.com.pojo.CoursesClasses;
@@ -363,6 +365,51 @@ public class CoursesServiceImpl implements ICoursesService {
             }
         }
         System.out.println("课程关闭时从缓存写回数据库"+new Date());
+    }
+
+
+
+
+
+    //新增课程
+    @Override
+    public void CoursesSave(Courses courses) {
+        System.out.println(courses);
+        courseMapper.CoursesSave(courses);
+    }
+    //更新课程
+    @Override
+    public void CourseUpdate(Courses courses) {
+        courseMapper.CourseUpdate(courses);
+    }
+    //通过id查询课程
+    @Override
+    public Courses queryById(Integer courses_id) {
+        System.out.println(courses_id);
+        System.out.println(courseMapper.queryById(courses_id));
+        return courseMapper.queryById(courses_id);
+    }
+
+    //分页显示
+    @Override
+    public EasyUIResult queryByPage(Integer page, Integer rows) {
+        //封装对象到EasyUIResult对象
+        //1.创建一个返回对象
+        EasyUIResult courseResult = new EasyUIResult();
+        //封装第一个属性total的数量
+        Integer total=courseMapper.queryTotal();
+        //3.封装第二个属性List<Product> plist;
+        //根据页数计算起始位置
+        Integer start1=(page - 1)*rows;
+        List<Courses> cList=courseMapper.queryByPage(start1, rows);
+        //4.封装对象属性
+        courseResult.setTotal(total);
+        courseResult.setRows(cList);
+        return courseResult;
+    }
+    //删除课程
+    public void CourseDelete(Integer courses_id){
+        courseMapper.deleteById(courses_id);
     }
 }
 

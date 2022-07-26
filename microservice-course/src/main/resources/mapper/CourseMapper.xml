@@ -8,8 +8,8 @@
         values(#{courses_id},#{courses_name},#{courses_type},#{courses_hour},#{credit},#{semester},#{courses_description})
     </insert>
     <!--删除单条课程 -->
-    <delete id="DelCourses" parameterType="int">
-        delete * from courses where courses_id=#{courses_id}
+    <delete id="deleteById" parameterType="int">
+        delete  from courses where courses_id=#{courses_id}
     </delete>
     <!-- 更新课程-->
     <update id="CourseUpdate" parameterType="Courses">
@@ -23,17 +23,28 @@
         where courses_id=#{courses_id}
     </update>
     <!-- 查询单条课程-->
-    <select id="queryById" resultType="Courses" parameterType="java.lang.Integer">
-        select * from courses where courses.courses_id=1
+    <select id="queryById" resultMap="CoursesMap" parameterType="Integer">
+        select * from courses where courses_id=#{courses_id}
     </select>
     <!-- 查询全部课程-->
-    <select id="queryTotal" resultType="int">
+    <select id="queryTotal" resultMap="CoursesMap">
         select count(courses_id) from courses
     </select>
     <!--分页显示-->
-    <select id="queryByPage" resultType="Courses">
+    <select id="queryByPage" resultMap="CoursesMap">
         select * from courses limit #{start},#{rows}
     </select>
+
+    <!--单条课程查询格式-->
+    <resultMap id="CoursesMap" type="Courses">
+        <id property="courses_id" column="courses_id"/>
+        <result property="courses_name" column="courses_name"/>
+        <result property="courses_type" column="courses_type"/>
+        <result property="courses_hour" column="courses_hour"/>
+        <result property="credit" column="credit"/>
+        <result property="semester" column="semester"/>
+        <result property="courses_description" column="courses_description"/>
+    </resultMap>
 
 
 
