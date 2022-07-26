@@ -1,9 +1,13 @@
 package cn.scnu.com.service;
 
+import cn.scnu.com.pojo.Courses;
 import cn.scnu.com.pojo.CoursesClasses;
+import cn.scnu.com.util.EasyUIResult;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import org.springframework.data.repository.query.Param;
 
 /**
  * <p>
@@ -51,4 +55,32 @@ public interface ICoursesService {
 
     //全写回
     void writebackRedisAll();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //新增课程
+    public void CoursesSave(Courses courses);
+
+    //更新课程
+    public void CourseUpdate(Courses courses);
+    //查询单条课程
+    public  Courses queryById(Integer courses_id);
+
+    //交给sql语句的惨呼一般只有1个，2个也可以使用#{}
+    //多个参数传递给sqlSession格局映射文件#{}拼接数据时，可以采用@Param注解定义参数变量名称
+    public EasyUIResult queryByPage(@Param("start")Integer start, @Param("rows")Integer rows);//分页查看
+
+    //删除课程
+    public void CourseDelete(Integer courses_id);
 }

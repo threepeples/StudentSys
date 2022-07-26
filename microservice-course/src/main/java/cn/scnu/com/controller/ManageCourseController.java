@@ -1,16 +1,16 @@
 package cn.scnu.com.controller;
 
+import cn.scnu.com.pojo.Courses;
 import cn.scnu.com.service.ICoursesService;
 import cn.scnu.com.util.ApplicationContextUtil;
 import cn.scnu.com.util.CommonUtils;
 
+import cn.scnu.com.util.EasyUIResult;
 import cn.scnu.com.util.Result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
@@ -130,6 +130,69 @@ public class ManageCourseController {
         return  Result.success(df.format(CommonUtils.BeginTime.getTime())+","+df.format(CommonUtils.EndTime.getTime()));
     }
 
+
+
+
+
+
+    @GetMapping("pageManage")
+    public Result coursesPageQuery(Integer page,Integer rows){
+        EasyUIResult result=coursesService.queryByPage(page, rows);
+        System.out.println(result.toString());
+        return Result.success(result);
+    }
+    //通过id查看课程情况，传输方式get，url参数:item,参数:courseId（String）
+    @GetMapping("item/{courses_id}")
+    public Result queryById(@PathVariable Integer courses_id){
+        try {
+            //没有异常返回成功信息
+            return Result.success(coursesService.queryById(courses_id));
+
+        }catch (Exception e){
+            //有异常返回失败信息
+            e.printStackTrace();
+            return Result.error("课程查看失败"+"失败原因:"+e.getMessage());
+        }
+    }
+    //商品新增，传输方式：Get，url:参数save
+    @GetMapping("save")
+    public Result courseSave(Courses courses){
+        //使用异常信息来表示成功和失败
+        try {
+            coursesService.CoursesSave(courses);
+            //没有异常返回成功信息
+            return Result.success("课程新增成功!");
+        }catch (Exception e){
+            //有异常返回失败信息
+            e.printStackTrace();
+            return Result.error("课程新增失败"+"失败原因:"+e.getMessage());
+        }
+    }
+    //商品更新,传输方法Get，url参数：update
+    @GetMapping("update")
+    public Result coursesUpdate(Courses courses){
+        //使用异常信息来表示成功和失败
+        try {
+            coursesService.CourseUpdate(courses);
+            //没有异常返回成功信息
+            return Result.success("课程更新成功!");
+        }catch (Exception e) {
+            //有异常返回异常信息
+            e.printStackTrace();
+            return Result.error("课程更新失败！"+"失败原因:"+e.getMessage());
+        }
+    }
+    //删除课程
+    @GetMapping("delete/{courses_id}")
+    public Result coursesDelete(@PathVariable Integer courses_id){
+        try {
+            coursesService.CourseDelete(courses_id);
+            return Result.success("课程删除成功！");
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("删除失败！"+"失败原因:"+e.getMessage());
+        }
+    }
 
 
 }

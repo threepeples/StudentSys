@@ -10,10 +10,13 @@ import cn.scnu.com.vo.stuVo;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -23,6 +26,8 @@ import java.util.List;
  * @Version 1.0
  * @Author HJW
  */
+
+@CrossOrigin(allowCredentials = "true")
 @RestController
 @RequestMapping("user/manage")
 public class UserController {
@@ -53,10 +58,15 @@ public class UserController {
             //ticket非空，表示redis存在登录的查询结构
             //将ticket作为cookie的值返回
             //调用CookieUtil工具类，将ticket值添加到cookie返回给前端
-            CookieUtils.setCookie(request,response,"Ticket",ticket);
+//            ResponseCookie cookie = ResponseCookie.from("Ticket",ticket)
+//                    .httpOnly(true).path("/").sameSite("None").secure(true).maxAge(Duration.ofHours(1)).domain("").build();
+//            response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
+//            response.setHeader("Set-Cookie","Ticket="+ticket+";SameSite=None;Secure=false");
+//            CookieUtils.setCookie(request,response,"Ticket",ticket);
+
             //登录成功则返回用户角色
-            System.out.println(userService.queryUserRoleByAccount(user.getAccount()));
-            return Result.success(userService.queryUserRoleByAccount(user.getAccount()));
+            System.out.println(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
+            return Result.success(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
         }else{
             return Result.error("登录失败");
         }

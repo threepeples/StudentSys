@@ -33,6 +33,8 @@ public interface CourseMapper {
     //交给sql语句的惨呼一般只有1个，2个也可以使用#{}
     //多个参数传递给sqlSession格局映射文件#{}拼接数据时，可以采用@Param注解定义参数变量名称
     public List<Courses> queryByPage(@Param("start")Integer start,@Param("rows")Integer rows);//分页查看
+    //删除课程
+    public void deleteById(Integer courses_id);
 
 //________________________
 
