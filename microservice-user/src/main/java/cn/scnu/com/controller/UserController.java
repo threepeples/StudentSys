@@ -26,10 +26,8 @@ import java.util.List;
  * @Version 1.0
  * @Author HJW
  */
-
+@RestController("user/manage")
 @CrossOrigin(allowCredentials = "true")
-@RestController
-@RequestMapping("user/manage")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -49,7 +47,7 @@ public class UserController {
      * @Param user 用户账号（学生学号）和密码
      * @return Result 用户角色（学生，老师，管理员）
      */
-    @RequestMapping("login")
+    @RequestMapping(value = "login")
     public Result login(@RequestBody Users user, HttpServletRequest request, HttpServletResponse response){
         //调用业务确定合法并且存储数据
         String ticket = userService.login(user);
@@ -92,6 +90,7 @@ public class UserController {
      */
     @RequestMapping("logout")
     public Result logout(HttpServletRequest request, HttpServletResponse response){
+
         CookieUtils.deleteCookie(request, response,"Ticket");
         return Result.success("成功退出");
     }
