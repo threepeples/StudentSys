@@ -27,7 +27,6 @@ import java.util.List;
  * @Author HJW
  */
 @RestController("user/manage")
-@CrossOrigin(allowCredentials = "true")
 public class UserController {
     @Autowired
     private UserService userService;
