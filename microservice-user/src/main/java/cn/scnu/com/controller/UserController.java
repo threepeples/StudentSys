@@ -53,6 +53,9 @@ public class UserController {
             //ticket非空，表示redis存在登录的查询结构
             //将ticket作为cookie的值返回
             //调用CookieUtil工具类，将ticket值添加到cookie返回给前端
+            System.out.println(request.getCookies());
+            System.out.println(response);
+
             CookieUtils.setCookie(request,response,"Ticket",ticket);
             //登录成功则返回用户角色
             System.out.println(userService.queryUserRoleByAccount(user.getAccount()));
