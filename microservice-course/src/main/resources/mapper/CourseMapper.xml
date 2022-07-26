@@ -55,10 +55,9 @@
         <result property="classTime" column="class_time"/>
         <result property="classroom" column="classroom"/>
         <result property="capacity" column="capacity"/>
-        <result property="teacherName" column="class_day"/>
+        <result property="teacherName" column="teacher_name"/>
         <result property="number" column="number"/>
-        <result property="classDay" column="stat"/>
-
+        <result property="classDay" column="class_day"/>
     </resultMap>
 
     <!--一次性获取全部可选class的详细信息-->
