@@ -10,10 +10,7 @@ import cn.scnu.com.vo.stuVo;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +23,7 @@ import java.util.List;
  * @Version 1.0
  * @Author HJW
  */
+@CrossOrigin
 @RestController("user/manage")
 public class UserController {
     @Autowired
