@@ -10,10 +10,13 @@ import cn.scnu.com.vo.stuVo;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -24,6 +27,7 @@ import java.util.List;
  * @Author HJW
  */
 @RestController("user/manage")
+@CrossOrigin(allowCredentials = "true")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -43,7 +47,7 @@ public class UserController {
      * @Param user 用户账号（学生学号）和密码
      * @return Result 用户角色（学生，老师，管理员）
      */
-    @RequestMapping("login")
+    @RequestMapping(value = "login")
     public Result login(@RequestBody Users user, HttpServletRequest request, HttpServletResponse response){
         //调用业务确定合法并且存储数据
         String ticket = userService.login(user);
@@ -52,10 +56,15 @@ public class UserController {
             //ticket非空，表示redis存在登录的查询结构
             //将ticket作为cookie的值返回
             //调用CookieUtil工具类，将ticket值添加到cookie返回给前端
-            CookieUtils.setCookie(request,response,"Ticket",ticket);
+//            ResponseCookie cookie = ResponseCookie.from("Ticket",ticket)
+//                    .httpOnly(true).path("/").sameSite("None").secure(true).maxAge(Duration.ofHours(1)).domain("").build();
+//            response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
+//            response.setHeader("Set-Cookie","Ticket="+ticket+";SameSite=None;Secure=false");
+//            CookieUtils.setCookie(request,response,"Ticket",ticket);
+
             //登录成功则返回用户角色
-            System.out.println(userService.queryUserRoleByAccount(user.getAccount()));
-            return Result.success(userService.queryUserRoleByAccount(user.getAccount()));
+            System.out.println(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
+            return Result.success(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
         }else{
             return Result.error("登录失败");
         }
@@ -81,6 +90,7 @@ public class UserController {
      */
     @RequestMapping("logout")
     public Result logout(HttpServletRequest request, HttpServletResponse response){
+
         CookieUtils.deleteCookie(request, response,"Ticket");
         return Result.success("成功退出");
     }
