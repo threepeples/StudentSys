@@ -23,7 +23,6 @@ import java.util.List;
  * @Version 1.0
  * @Author HJW
  */
-@CrossOrigin
 @RestController("user/manage")
 public class UserController {
     @Autowired
