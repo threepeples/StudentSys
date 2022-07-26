@@ -60,7 +60,7 @@ public class UserController {
             System.out.println(userService.queryUserRoleByAccount(user.getAccount()));
             return Result.success(userService.queryUserRoleByAccount(user.getAccount()));
         }else{
-            return Result.success("登录失败");
+            return Result.error("登录失败");
         }
     }
 
