@@ -24,7 +24,8 @@ import java.util.List;
  * @Author HJW
  */
 @CrossOrigin
-@RestController("user/manage")
+@RestController
+@RequestMapping("user/manage")
 public class UserController {
     @Autowired
     private UserService userService;

@@ -6,6 +6,8 @@
     <artifactId>eureka-server</artifactId>
     <name>eureka-server</name>
     <description>eureka-server</description>
+    <packaging>jar</packaging>
+
     <parent>
         <groupId>cn.scnu.com</groupId>
         <artifactId>StudentSys</artifactId>
@@ -18,14 +20,13 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
     </properties>
 
-    <dependencies>
-    </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-
-        </dependencies>
-    </dependencyManagement>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

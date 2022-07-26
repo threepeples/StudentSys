@@ -5,6 +5,7 @@
     <artifactId>config-server</artifactId>
     <name>config-server</name>
     <description>config-server</description>
+    <packaging>jar</packaging>
     <parent>
         <groupId>cn.scnu.com</groupId>
         <artifactId>StudentSys</artifactId>
