@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 
@@ -32,6 +33,7 @@ public class Grade implements Serializable {
     private Integer majors_id;
 
     @ApiModelProperty(value = "目前处于第几学期")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Integer semester;
 
 

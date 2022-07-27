@@ -6,10 +6,7 @@ import cn.scnu.com.pojo.CoursesClasses;
 import cn.scnu.com.util.Result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +20,11 @@ import java.util.Set;
  * @author tt
  * @since 2022-06-25
  */
+
 @RestController
 @EnableScheduling
 @RequestMapping("/course/courses")
+@CrossOrigin
 public class CoursesController {
     @Autowired
     private CoursesServiceImpl coursesService;
