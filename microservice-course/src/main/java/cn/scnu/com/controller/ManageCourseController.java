@@ -129,11 +129,7 @@ public class ManageCourseController {
 
         return  Result.success(df.format(CommonUtils.BeginTime.getTime())+","+df.format(CommonUtils.EndTime.getTime()));
     }
-
-
-
-
-
+    
 
     @GetMapping("pageManage")
     public Result coursesPageQuery(Integer page,Integer rows){
@@ -154,7 +150,7 @@ public class ManageCourseController {
             return Result.error("课程查看失败"+"失败原因:"+e.getMessage());
         }
     }
-    //商品新增，传输方式：Get，url:参数save
+    //课程新增，传输方式：Get，url:参数save
     @GetMapping("save")
     public Result courseSave(Courses courses){
         //使用异常信息来表示成功和失败
@@ -168,7 +164,7 @@ public class ManageCourseController {
             return Result.error("课程新增失败"+"失败原因:"+e.getMessage());
         }
     }
-    //商品更新,传输方法Get，url参数：update
+    //课程更新,传输方法Get，url参数：update
     @GetMapping("update")
     public Result coursesUpdate(Courses courses){
         //使用异常信息来表示成功和失败
