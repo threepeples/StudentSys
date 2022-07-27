@@ -54,16 +54,7 @@ public class UserController {
         String ticket = userService.login(user);
         //控制层将业务层存储登录成功的rediskey值
         if(!"".equals(ticket)&&ticket!=null){
-            //ticket非空，表示redis存在登录的查询结构
-            //将ticket作为cookie的值返回
-            //调用CookieUtil工具类，将ticket值添加到cookie返回给前端
-//            ResponseCookie cookie = ResponseCookie.from("Ticket",ticket)
-//                    .httpOnly(true).path("/").sameSite("None").secure(true).maxAge(Duration.ofHours(1)).domain("").build();
-//            response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
-//            response.setHeader("Set-Cookie","Ticket="+ticket+";SameSite=None;Secure=false");
-//            CookieUtils.setCookie(request,response,"Ticket",ticket);
-
-            //登录成功则返回用户角色
+            //登录成功则返回用户角色和ticket
             System.out.println(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
             return Result.success(userService.queryUserRoleByAccount(user.getAccount())+"-"+ticket);
         }else{
@@ -92,7 +83,7 @@ public class UserController {
     @RequestMapping("logout")
     public Result logout(HttpServletRequest request, HttpServletResponse response){
 
-        CookieUtils.deleteCookie(request, response,"Ticket");
+//        CookieUtils.deleteCookie(request, response,"Ticket");
         return Result.success("成功退出");
     }
 
@@ -100,12 +91,14 @@ public class UserController {
      * 修改密码,登录状态下通过request后去到前端的cookie，只需要在请求体传信旧密码即可
      * @return 响应体（是否成功）
      */
-    @RequestMapping("changePwd")
-    public Result changePwd(@RequestBody changePwdVo vo, HttpServletRequest request){
-        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
-            return Result.error("您还未登录！");
+    @RequestMapping("changePwd/{cookie}")
+    public Result changePwd(@RequestBody changePwdVo vo, @PathVariable String cookie){
+//        String cookie = CookieUtils.getCookieValue(request,"Ticket");
+        if(cookie.equals("")||cookie == null){
+             return Result.error("您还未登录！");
         }
-        String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
+        String account = cookie.split("_")[2];
+        System.out.println(account);
         if(userService.changePwd(vo.getOldPwd(),vo.getNewPwd(), Integer.valueOf(account))){
             return Result.success("修改成功");
         }else{
@@ -117,27 +110,28 @@ public class UserController {
      * 获取学生个人信息，通过cookie
      * @return 响应体（学生详细信息）
      */
-    @RequestMapping("getStuInfo")
-    public Result getStuInfo(HttpServletRequest request){
-        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
+    @RequestMapping("getStuInfo/{cookie}")
+    public Result getStuInfo(@PathVariable String cookie){
+//        String cookie = CookieUtils.getCookieValue(request,"Ticket");
+        if(cookie.equals("")||cookie == null){
             return Result.error("您还未登录！");
         }
-        String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
+        String account = cookie.split("_")[2];
         return Result.success(userService.queryStuDetailsByAccount(Integer.valueOf(account)));
     }
 
     /**
      * 学生 修改学生个人信息 学生只能修改description
      * @param description 学生个人描述
-     * @param request 请求
      * @return 响应体（成功修改）
      */
-    @RequestMapping("stuChangeStuInfo")
-    public Result changeStuInfoByStu(String description,HttpServletRequest request){
-        if(CookieUtils.getCookieValue(request,"Ticket").equals("")){
+    @RequestMapping("stuChangeStuInfo/{cookie}")
+    public Result changeStuInfoByStu(String description,@PathVariable String cookie){
+//        String cookie = CookieUtils.getCookieValue(request,"Ticket");
+        if(cookie.equals("")||cookie == null){
             return Result.error("您还未登录！");
         }
-        String account = CookieUtils.getCookieValue(request,"Ticket").split("_")[2];
+        String account = cookie.split("_")[2];
         userService.changeStuInfoByStu(description, Integer.valueOf(account));
         return Result.success("修改成功");
     }
