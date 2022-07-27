@@ -1,5 +1,6 @@
 package cn.scnu.com.controller;
 
+import cn.scnu.com.pojo.Students;
 import cn.scnu.com.pojo.Teachers;
 import cn.scnu.com.pojo.Users;
 import cn.scnu.com.service.UserService;
@@ -130,6 +131,7 @@ public class UserController {
             return Result.error("您还未登录！");
         }
         String account = cookie.split("_")[2];
+//        System.out.println(description);
         userService.changeStuInfoByStu(description, Integer.valueOf(account));
         return Result.success("修改成功");
     }

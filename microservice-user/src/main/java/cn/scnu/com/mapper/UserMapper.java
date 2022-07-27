@@ -30,6 +30,8 @@ public interface UserMapper {
     void insertStudentInfo(List<Students> students);
     //通过major获取majorId
     Integer queryMajorIdByMajor(String major);
+    //根据majorid获取major
+    String queryMajorByMajorId(Integer majorsId);
     //生成账号
     void insertStudentUser(List<Users> users);
     //学生修改信息里的description
@@ -38,4 +40,6 @@ public interface UserMapper {
     void changeStuInfoByAdmin(Students s);
     //通过名字找到老师
     Teachers queryTeacherByTeacherName(String name);
+
+
 }

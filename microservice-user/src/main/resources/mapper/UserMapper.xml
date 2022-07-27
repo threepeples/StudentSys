@@ -47,6 +47,10 @@
     <select id="queryMajorIdByMajor" parameterType="String" resultType="Integer">
         select majors_id from majors where name=#{major}
     </select>
+    <!--根据majorId找到major-->
+    <select id="queryMajorByMajorId" parameterType="Integer" resultType="String">
+        select name from majors where majors_id=#{majorsId}
+    </select>
 
     <!--修改学生description-->
     <update id="changeStuInfoByStu">

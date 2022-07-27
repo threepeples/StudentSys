@@ -127,10 +127,18 @@ public class UserService {
      * @param account 账号
      * @return Studeens
      */
-    public Students queryStuDetailsByAccount(Integer account) {
+    public stuVo queryStuDetailsByAccount(Integer account) {
         Students stu = userMapper.queryStudentDetailsByAccount(account);
-        System.out.println(stu.toString());
-        return stu;
+//        System.out.println(stu.toString());
+        stuVo stuVo = new stuVo();
+        stuVo.setDescription(stu.getDescription());
+        stuVo.setGradeId(stu.getGradeId());
+        stuVo.setName(stu.getName());
+        stuVo.setSemester(stu.getSemester());
+        stuVo.setStudentId(stu.getStudentId());
+        stuVo.setMajor(userMapper.queryMajorByMajorId(stu.getMajorsId()));
+        stuVo.setTimeEnrollment(stu.getTimeEnrollment());
+        return stuVo;
     }
 
     /**
@@ -139,12 +147,16 @@ public class UserService {
      */
     public String insertStudent(List<stuVo> stuVoList) {
         String result = "成功导入";
+        String result2 = "";
+        int flag = 1;
         List<Students> studentsList = new ArrayList<>();
         List<Users> stuUsersList = new ArrayList<>();
 
         for(stuVo stu : stuVoList){
             //检查是否已经存在该账号
             if(userMapper.queryStudentDetailsByAccount(stu.getStudentId())!=null){
+                flag = 2;
+                result2 += stu.getName()+"已存在,";
                 continue;
             }
 
@@ -155,7 +167,13 @@ public class UserService {
             s.setDescription(stu.getDescription());
             s.setGradeId(stu.getGradeId());
             s.setSemester(stu.getSemester());
-            s.setMajorsId(userMapper.queryMajorIdByMajor(stu.getMajor()));
+            Integer majorId = userMapper.queryMajorIdByMajor(stu.getMajor());
+            if(majorId == null){
+                result2 += stu.getMajor()+"专业不存在,";
+                flag = 2;
+                continue;
+            }
+            s.setMajorsId(majorId);
             s.setTimeEnrollment(stu.getTimeEnrollment());
             //添加到列表
             studentsList.add(s);
@@ -169,13 +187,19 @@ public class UserService {
             stuUsersList.add(u);
         }
         if(studentsList.isEmpty()){
-            return "所有用户存在，无需重复导入";
+            return result2 + "已存在学生的无需重复导入，专业不存在的导入不成功，请联系管理添加专业或者重新输入，其余无异常的成功导入";
         }
         //导入学生表
         userMapper.insertStudentInfo(studentsList);
         //导入用户表
         userMapper.insertStudentUser(stuUsersList);
-        return result;
+        if(flag==1){
+            return result;
+        }
+        else{
+            return result2 + "已存在学生的无需重复导入，专业不存在的导入不成功，请联系管理添加专业或者重新输入，其余无异常的成功导入";
+        }
+
     }
 
     /**
