@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("user/manage")
-@CrossOrigin(allowCredentials = "true")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;

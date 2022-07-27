@@ -28,6 +28,7 @@ import java.util.TimerTask;
 @RestController
 @EnableScheduling
 @RequestMapping("/course/manage")
+@CrossOrigin
 public class ManageCourseController {
 
     @Autowired
