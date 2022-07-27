@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>microservice-message</name>
     <description>microservice-message</description>
+    <packaging>jar</packaging>
     <parent>
         <groupId>cn.scnu.com</groupId>
         <artifactId>StudentSys</artifactId>
@@ -41,5 +42,12 @@
         </dependency>
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -27,7 +27,9 @@ import java.util.List;
  * @Version 1.0
  * @Author HJW
  */
-@RestController("user/manage")
+@RestController
+@RequestMapping("user/manage")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -47,7 +49,7 @@ public class UserController {
      * @Param user 用户账号（学生学号）和密码
      * @return Result 用户角色（学生，老师，管理员）
      */
-    @RequestMapping(value = "login")
+    @RequestMapping("login")
     public Result login(@RequestBody Users user, HttpServletRequest request, HttpServletResponse response){
         //调用业务确定合法并且存储数据
         String ticket = userService.login(user);

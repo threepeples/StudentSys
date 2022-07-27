@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.scnu.com.mapper.CourseMapper">
+<mapper namespace="cn.scnu.com.mapper.MessageMapper">
+
+    <select id="getNotices" resultType="cn.scnu.com.vo.NoticeList">
+        select id,title,createTime from notice order by createTime desc
+    </select>
+    <select id="getNoticeDetail" resultType="cn.scnu.com.pojo.Notice" parameterType="java.lang.Integer">
+        select * from notice where id=#{id}
+    </select>
+    <resultMap id="OwnCurrentCourses" type="cn.scnu.com.vo.OwnCurrentCourses">
+        <result column="class_time" property="classTime"></result>
+        <result column="courses_name" property="className"></result>
+        <result column="classroom" property="classroom"></result>
+        <result column="teacher_name" property="teacher"></result>
+        <result column="class_day" property="classDay"></result>
+        <result column="credit" property="credit"></result>
+    </resultMap>
+    <select id="getCurrentCourses" resultMap="OwnCurrentCourses"
+            parameterType="java.lang.Integer">
+        select class_time,courses_name,classroom,teacher_name,class_day,co.credit
+        from students s,classes cl,courses co,class_selections cs
+        where s.student_id=#{id} and s.student_id=cs.student_id  and cl.classes_id=cs.classes_id and cl.courses_id=co.courses_id and s.semester=co.semester;
+
+    </select>
+    <resultMap id="OwnGrade" type="cn.scnu.com.vo.OwnGrade">
+        <result column="courses_name" property="className"></result>
+        <result column="credit" property="credit"></result>
+        <result column="score" property="grade"></result>
+        <result column="courses_hour" property="coursesHour"></result>
+        <result column="courses_id" property="coursesId"></result>
+    </resultMap>
+    <select id="getGrades" resultMap="OwnGrade" parameterType="java.lang.Integer">
+        select courses_name,cs.credit,score,courses_hour,co.courses_id
+        from courses co,classes cl,class_selections cs
+        where cs.student_id=#{id} and co.courses_id=cl.courses_id and cl.classes_id=cs.classes_id;
+    </select>
+
 
 </mapper>
