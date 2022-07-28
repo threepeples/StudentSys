@@ -8,6 +8,7 @@ import cn.scnu.com.utils.MD5Util;
 import cn.scnu.com.utils.MapperUtil;
 import cn.scnu.com.utils.PrefixKey;
 import cn.scnu.com.vo.stuVo;
+import cn.scnu.com.vo.stuWithMajorIdVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,16 +128,17 @@ public class UserService {
      * @param account 账号
      * @return Studeens
      */
-    public stuVo queryStuDetailsByAccount(Integer account) {
+    public stuWithMajorIdVo queryStuDetailsByAccount(Integer account) {
         Students stu = userMapper.queryStudentDetailsByAccount(account);
 //        System.out.println(stu.toString());
-        stuVo stuVo = new stuVo();
+        stuWithMajorIdVo stuVo = new stuWithMajorIdVo();
         stuVo.setDescription(stu.getDescription());
         stuVo.setGradeId(stu.getGradeId());
         stuVo.setName(stu.getName());
         stuVo.setSemester(stu.getSemester());
         stuVo.setStudentId(stu.getStudentId());
         stuVo.setMajor(userMapper.queryMajorByMajorId(stu.getMajorsId()));
+        stuVo.setMajorId(stu.getMajorsId());
         stuVo.setTimeEnrollment(stu.getTimeEnrollment());
         return stuVo;
     }
