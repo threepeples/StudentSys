@@ -207,22 +207,25 @@ public class CoursesServiceImpl implements ICoursesService {
     //判断学生是否加入了一个课程
     public Boolean getSelectedOne(Integer student_id, String classes_id){
         Set<String> selectedClassIds=getRedisSelectedClassId(student_id);
+        int test=classes_id.indexOf("-");
+        String course_id=classes_id.substring(0,test);
         for (String selectedClassId:
                 selectedClassIds) {
             //匹配selectedClassId和classes_id的自-前的字符
-            int i=0;
-            while (!"-".equals(classes_id.charAt(i))){
-                if(selectedClassId.charAt(i)==classes_id.charAt(i)){
-                    return Boolean.TRUE;
-                }
-                i++;
+
+            //获取 - 前的字符
+            int testI=selectedClassId.indexOf("-");
+
+            if ("".equals(selectedClassId)){
+                continue;
             }
-            if(selectedClassId.charAt(i)==classes_id.charAt(i)){
+            if(course_id.equals(selectedClassId.substring(0,testI))){
                 return Boolean.TRUE;
             }
         }
         return Boolean.FALSE;
     }
+
 
     //判断学生是否加入了一个class
     public Boolean getSelectedOneClass(Integer student_id, String classes_id){
@@ -264,6 +267,8 @@ public class CoursesServiceImpl implements ICoursesService {
         //立刻修改数据库中的人数
         courseMapper.DeclineClassNumberLeft(classes_id);
     }
+
+
 
     //退选接口，进行退选
     @Override
